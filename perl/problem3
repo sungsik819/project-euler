@@ -1,0 +1,18 @@
+#!/usr/local/bin/perl
+
+use strict;
+use warnings;
+
+my ($result, $i, $value)  = (0, 1, 600851475143);
+while(1) {
+    if($i == $value) {
+        $result = $value;
+        last; 
+    }
+
+    $value /= $i if($value % $i == 0); 
+    $i++;
+}
+
+print $result."\n";
+
