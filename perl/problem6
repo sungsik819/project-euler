@@ -1,0 +1,12 @@
+#!/usr/local/bin/perl
+
+use strict;
+use warnings;
+
+our $sqsum += $_ for(1..100);
+$sqsum **= 2;
+
+our $sumsq += $_ ** 2 for(1..100);
+my $result = $sqsum - $sumsq;
+
+print $result;
