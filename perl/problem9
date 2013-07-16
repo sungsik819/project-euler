@@ -1,0 +1,20 @@
+#!/usr/local/bin/perl
+
+use strict;
+use warnings;
+use v5.18;
+
+my ($a, $b, $c) = (5, 12, 13);
+my $result = 0;
+foreach(2..100) {
+        my ($A, $B, $C) = ($a * $_, $b * $_, $c * $_);
+        print "$A, $B, $C\n";
+        $result = $A + $B + $C;
+        print "result : $result\n";
+
+        if($result == 1000) {
+                $result = $A * $B * $C;
+        } 
+}
+
+print $result;

@@ -1,0 +1,21 @@
+#!/usr/local/bin/perl
+
+use strict;
+use warnings;
+
+sub TimesPrime {
+        my @prime = qw/2 3 5 7/;
+        my $i = 7;
+        my $numberprime = $_[0];
+        until($numberprime eq @prime) {
+                for(@prime) {
+                        last if($i % $_ == 0);
+                        push @prime, $i if($i > $prime[-1] and $prime[-1] == $_);
+                }
+        }continue {
+                $i++;
+        }
+
+        return $prime[-1];
+}
+print TimesPrime(10001)."\n";
