@@ -1,0 +1,22 @@
+#!/usr/local/bin/perl
+
+use strict;
+use warnings;
+use v5.18;
+
+say eval join '+', grep isprime($_) == $_, 2..2000000
+
+sub isprime {
+        my $number = shift;
+        my $i = 2;
+        while(1) {
+                return $number if($i**2 > $number);
+                return 0 if($number % $i == 0);
+                $i++;
+        }
+}
+
+
+
+
+
