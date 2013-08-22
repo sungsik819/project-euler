@@ -3,9 +3,6 @@
 use strict;
 use warnings;
 
-my $sum = 0;
+my $sum = eval join '+', grep $_ % 3 == 0 || $_ % 5 == 0, 1..999;
 
-foreach(1..999) {
-    $sum += $_ if($_ % 3 == 0 || $_ % 5 == 0);
-}
 print $sum."\n";

@@ -2,17 +2,29 @@
 
 use strict;
 use warnings;
+use Benchmark;
 use v5.18;
 
-say eval join '+', grep isprime($_) == $_, 2..2000000
+my $t0 = new Benchmark;
+my @primes = (2);
+my $result = 2;
+for(3..1999999) {
+        if($_ % 2 != 0 && isprime($_) == $_) {
+                push @primes, $_;
+                $result += $_;
+        }
+}
+say $result;
+
+my $t1 = new Benchmark;
+my $td = timediff($t1, $t0);
+say "the code took : ", timestr($td);
 
 sub isprime {
         my $number = shift;
-        my $i = 2;
-        while(1) {
-                return $number if($i**2 > $number);
-                return 0 if($number % $i == 0);
-                $i++;
+        for(@primes) {
+                return 0 if($number % $_ == 0);
+                return $number if($_**2 > $number);
         }
 }
 
