@@ -3,7 +3,11 @@
 use strict;
 use warnings;
 
-
+=pod
+20X20 크기의 숫자 내에서 4개씩 곱 중 가장 큰 것을 구하는 문제
+오른쪽, 아래, 왼쪽 대각선, 오른쪽 대각선 4가지로 구했다.
+어차피 왼쪽, 위의 방향은 오른쪽, 아래의 값과 같기 때문이다.
+=cut
 open GRID, "<", "problem11_file.txt" || die "open error $!";
 
 # 줄 단위를 2차원 배열로 만들기 
