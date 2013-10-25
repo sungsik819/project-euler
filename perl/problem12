@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use Test::More;
+use strict;
+use warnings;
+
+is(triangleNumber(1), 1);
+is(triangleNumber(2), 3);
+is(triangleNumber(3), 6);
+is(triangleNumber(4), 10);
+done_testing();
+
+sub triangleNumber {
+	my $a = $_[0];
+
+	if($a == 0)
+	{
+		return 0;
+	}
+	if($a == 1)
+	{
+		return 1;
+	}
+	elsif($a == 2)
+	{ 
+		$a = ($a - 1) + $a;
+	}
+	elsif($a == 3)
+	{
+		$a = ($a - 2) + ($a -1) + $a;
+	}
+	elsif($a == 4)
+	{
+		$a = ($a - 3) + ($a - 2) + ($a - 1) + $a;
+	} 
+
+	return $a;
+}
+
