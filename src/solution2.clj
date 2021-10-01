@@ -5,5 +5,3 @@
      (filter #(< % 4000000))
      (filter #(= (mod % 2) 0))
      (reduce + ))
-
-(reduce + (filter #(= (mod % 2) 0) (filter #(< % 4000000) (take 50 (fib 0 1)))))

@@ -1,8 +1,0 @@
-#!/usr/local/bin/perl
-
-use strict;
-use warnings;
-
-my $sum = eval join '+', grep $_ % 3 == 0 || $_ % 5 == 0, 1..999;
-
-print $sum."\n";
