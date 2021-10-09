@@ -41,10 +41,32 @@
 (defn lcm [a b]
   (quot (abs (* a b)) (gcd a b)))
 
-;; 순차적인 n개의 숫자의 최소공배수 구하기
-(defn n-lcm [a b]
-  (reduce #(if (>= (lcm %1 %2) %1) (lcm %1 %2) %2)
-          (range a (inc b))))
+;; 숫지 뒤집기
+(defn reverse-number [number]
+  (loop [p 0
+         temp number]
+    (if (= temp 0) p
+        (recur (+ (* p 10) (rem temp 10))
+               (quot temp 10)))))
+
+;; (sieve-of-eratostenes 600851475143) stackoverflow error
+;; 에라토스테네스의 체 (n번째 숫자안의 소수를 구하기 위한 방법)
+(defn sieve-of-eratostenes [^long n]
+  (let [max-lange (long (Math/sqrt n))]
+    (loop [a (range 2 (inc n))
+           n (long (first a))
+           r []]
+      (if (> n max-lange) (seq (into r a))
+          (recur (remove #(zero? (mod % n)) a)
+                 (first (remove #(zero? (mod % n)) a))
+                 (conj r n))))))
+
+;; n의 인수
+(defn factors [^long n]
+  (seq (reduce #(if (zero? (mod n %2))
+                  (conj %1 %2)
+                  %1)
+               [] (sieve-of-eratostenes n))))
 
 (defmacro sectime
   [expr]
