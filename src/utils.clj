@@ -21,7 +21,7 @@
 ;; n번째 소수 구하기
 (defn n-prime [n]
   (->> (map div-cnt (range))
-       (filter #(= 2 (second %)))
+       (filter (fn [[_ c]] (= 2 c)))
        (take n)
        (last)
        (first)))
