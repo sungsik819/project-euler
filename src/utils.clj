@@ -1,5 +1,9 @@
 (ns utils)
 
+;; 제곱
+(defn square [x]
+  (* x x))
+
 ;; 약수 구하기
 (defn divisor [n]
   (let [max (inc (Math/sqrt n))]

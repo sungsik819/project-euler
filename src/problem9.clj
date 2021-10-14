@@ -1,9 +1,5 @@
-(ns problem9)
-
-;;3,4,5 = 12
-
-(defn square [x]
-  (* x x))
+(ns problem9
+  (:require [utils :as u]))
 
 ;; a < b < c 이면서
 ;; a^2 + b^2 = c^2 인데
@@ -13,11 +9,29 @@
       b (range 300 500)
       c (range 400 500)
       :when (and (< a b c) 
-                 (= (+ (square a) (square b)) (square c))
+                 (= (+ (u/square a) (u/square b)) (u/square c))
                  (= 1000 (+ a b c)))]
   (* a b c))
 
-;; https://m.blog.naver.com/kyh941031/221636810763 보면서 만드는중
-(let [Ns (Math/pow 1000 2)]
-  (reduce #(if (zero? (mod Ns %2)) (conj %1 [(- 1000 Ns) (- 1000 %2) (- 1000 (- 1000 Ns))]) %1) [] (range (Math/floor (+ 1 (quot 1000 2)))
-                               (inc (Math/ceil (- (quot 1000 (Math/pow 2 0.5)) 1))))))
+;; for 2번 사용하여 구현
+(->> (for [b (range 1 1000)
+           a (range 1 b)]
+       (let [c (- 1000 a b)]
+         (when (= (+ (u/square a) (u/square b)) (u/square c))
+           [a b c])))
+     (remove #(= nil %)))
+
+;; a * b * c가되는 N에으로 피타고라스의 수 구하기
+;; https://m.blog.naver.com/kyh941031/221636810763 참고
+(defn pythagorean-triple [N]
+  (let [lower (+ 1 (Math/floor (quot N 2)))
+        upper (Math/ceil (quot N (Math/pow 2 0.5)))
+        Ns (Math/pow N 2)
+        py-quot (partial quot Ns)]
+    (->>
+     (range lower upper)
+     (filter #(zero? (mod Ns %)))
+     (map #(let [a (int (- N (py-quot (* % 2))))
+                 b (int (- N %))
+                 c (int (- % a))]
+             [a b c])))))
