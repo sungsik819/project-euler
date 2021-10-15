@@ -21,17 +21,8 @@
            [a b c])))
      (remove #(= nil %)))
 
-;; a + b + c가되는 N으로 피타고라스의 수 구하기
 ;; https://m.blog.naver.com/kyh941031/221636810763 참고
-(defn pythagorean-triple [N]
-  (let [lower (+ 1 (Math/floor (quot N 2)))
-        upper (Math/ceil (quot N (Math/pow 2 0.5)))
-        Ns (Math/pow N 2)
-        py-quot (partial quot Ns)]
-    (->>
-     (range lower upper)
-     (filter #(zero? (mod Ns %)))
-     (map #(let [a (int (- N (py-quot (* % 2))))
-                 b (int (- N %))
-                 c (int (- % a))]
-             [a b c])))))
+(->>
+ (u/pythagorean-triple 1000)
+ (first)
+ (apply * ))
