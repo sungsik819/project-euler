@@ -21,7 +21,7 @@
            [a b c])))
      (remove #(= nil %)))
 
-;; a * b * c가되는 N에으로 피타고라스의 수 구하기
+;; a + b + c가되는 N으로 피타고라스의 수 구하기
 ;; https://m.blog.naver.com/kyh941031/221636810763 참고
 (defn pythagorean-triple [N]
   (let [lower (+ 1 (Math/floor (quot N 2)))
