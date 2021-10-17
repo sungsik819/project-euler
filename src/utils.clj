@@ -66,7 +66,18 @@
      (map #(let [a (int (- N (py-quot (* % 2))))
                  b (int (- N %))
                  c (int (- % a))]
-             [a b c])))))
+             (seq [a b c])))
+     (apply identity))))
+
+;; 숫자를 순차적으로 자리수별로 나눠주는 함수
+;; 예를 들면 7316717653을 4자리씩 나눈다고 했을때
+;; ((7 3 1 6) (7 1 7 6) (3 1 6 7) (1 7 6 5) (1 6 7 1) (7 6 5 3) (6 7 1 7) (7 1 7 6) (1 7 6 5) (7 6 5 3))
+;; 가 된다.
+(defn partition-numbers-from-str [p sn]
+  (loop [a (map #(Character/digit % 10) sn)
+         r []]
+    (if (empty? (seq a)) (seq r)
+        (recur (rest a) (into r (partition p a))))))
 
 ;; (sieve-of-eratostenes 600851475143) stackoverflow error
 ;; 에라토스테네스의 체 (n번째 숫자안의 소수를 구하기 위한 방법)

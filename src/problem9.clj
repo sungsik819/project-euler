@@ -24,5 +24,4 @@
 ;; https://m.blog.naver.com/kyh941031/221636810763 참고
 (->>
  (u/pythagorean-triple 1000)
- (first)
- (apply * ))
+ (apply *))
