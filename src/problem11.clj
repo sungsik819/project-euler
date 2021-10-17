@@ -22,31 +22,16 @@
         [20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54]
         [01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48]])
 
-(defn partition-numbers [p sn]
-  (loop [a sn
-         r []]
-    (if (empty? (seq a)) (seq r)
-        (recur (rest a) (into r (partition p a))))))
-
-;; 가로방향
-(defn horizontal-axis [a]
+;; 축방향 합 최대값 
+(defn get-max-sum-axis [a]
   (->>
-   (mapcat #(partition-numbers 4 %) a)
+   (mapcat #(u/partition-numbers 4 %) a)
    (map #(apply * %))
    (sort)
    (last)))
 
-;; 세로방향
-(defn vertial-axis [a]
-  (->>
-   (apply map vector a)
-   (mapcat #(partition-numbers 4 %))
-   (map #(apply * %))
-   (sort)
-   (last)))
-
-;; 대각선
-(defn diagonal [ar]
+;; 대각선 합 최대값
+(defn get-max-sum-diagonal [ar]
   (->> (loop [a ar
               c 21
               r []]
@@ -58,21 +43,15 @@
        (sort)
        (last)))
 
-;; 역대각선
-(defn reverse-diagonal [ar]
-  (->> (loop [a (map #(reverse %) ar)
-              c 21
-              r []]
-         (if (every? empty? (seq a)) r
-             (recur (map #(rest %) a) (dec c) (conj r (flatten (partition 1 c (flatten a)))))))
-       (flatten)
-       (partition 4)
-       (map #(apply * %))
-       (sort)
-       (last)))
+;; 역 대각선 값
+(def reverse-values (map #(reverse %) m))
+
+;; 세로 방항 값
+(def vertial-values (apply map vector m))
 
 ;; 70600674
-(u/sectime (max (horizontal-axis m) 
-                (vertial-axis m) 
-                (diagonal m) 
-                (reverse-diagonal m)))
+(u/sectime (max
+            (get-max-sum-axis m)
+            (get-max-sum-axis vertial-values)
+            (get-max-sum-diagonal m)
+            (get-max-sum-diagonal reverse-values)))

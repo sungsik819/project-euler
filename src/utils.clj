@@ -79,6 +79,12 @@
     (if (empty? (seq a)) (seq r)
         (recur (rest a) (into r (partition p a))))))
 
+(defn partition-numbers [p sn]
+  (loop [a sn
+         r []]
+    (if (empty? (seq a)) (seq r)
+        (recur (rest a) (into r (partition p a))))))
+
 ;; (sieve-of-eratostenes 600851475143) stackoverflow error
 ;; 에라토스테네스의 체 (n번째 숫자안의 소수를 구하기 위한 방법)
 (defn sieve-of-eratostenes [^long n]
