@@ -4,14 +4,15 @@
 ;; 삼각수의 성질
 ;; n번째 수를 구하기 위해서는 이전 숫자에 n을 더한다.
 ;; 예) 2번째 수를 구하려면 1 + 2로 3이 된다.
-(defn triangle-number [end]
+(defn sum-one-to-n2 [end]
   (->>
    (range 1 (inc end))
    (apply +)))
 
 ;; https://m.blog.naver.com/kyh941031/221641016407
-(defn triangle-number2 [end]
-  (quot (* end (+ end 1)) 2))
+;; 1부터 n까지 합
+(defn sum-one-to-n [n]
+  (quot (* n (+ n 1)) 2))
 
 (defn count-divisor [n]
   (count (u/divisor n)))
@@ -24,18 +25,17 @@
 
 ;; 약수가 n개인 삼각수 중 제일 작은 수
 (defn triangle-divisor [n]
-  (let [[a] (take 1 (filter #(when (<= n (count-triangle-divisor %)) %) (range)))]
+  (let [[a] (->> (range) 
+                 (filter #(when (<= n (count-triangle-divisor %)) %))
+                 (take 1))]
     (* a (quot (inc a) 2))))
 
-(u/sectime (triangle-divisor 10))
-
-
-(map #(vector % (triangle-number2 %)) (range 12370 12380))
+(u/sectime (triangle-divisor 500))
 
 ;; 76576500
 ;; 오래 걸림
 ;; 범위를 맞춰서 찾느라 몇번 틀림
 (->>
-            (map #(triangle-number2 %) (range 12370 12380))
+            (map #(sum-one-to-n %) (range 12370 12380))
             (map #(vector % (count (u/divisor %))))
             (filter #(<= 500 (last %))))
