@@ -36,6 +36,6 @@
 ;; 오래 걸림
 ;; 범위를 맞춰서 찾느라 몇번 틀림
 (->>
-            (map #(sum-one-to-n %) (range 12370 12380))
+            (map #(sum-one-to-n %) (range 12370 12379))
             (map #(vector % (count (u/divisor %))))
             (filter #(<= 500 (last %))))
