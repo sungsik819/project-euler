@@ -1,5 +1,13 @@
 (ns utils)
 
+;; end이하 p의 배수의 합
+;; (s 10 2) 이라면 10 이하 2의 배수의 합 30이다.
+;; 2, 4, 6, 8, 10을 전부 더하면 30이 된다.
+;; 또는 1부터 end까지의 합
+(defn sum
+  ([end] (quot (* end (+ end 1)) 2))
+  ([end p] (* p (sum (quot end p)))))
+
 ;; 제곱
 (defn square [x]
   (* x x))
