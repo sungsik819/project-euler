@@ -6,8 +6,14 @@
 ;; Find the largest palindrome made from the product of two 3-digit numbers.
 
 ;; 이 값의 답 906609
-(last (filter #(= (u/reverse-number %) %)
-              (for [i (range 900 999)
-                    j (range 900 999)
-                    :let [n (* i j)]]
-                n)))
+(u/sectime (apply max (filter #(= (u/reverse-number %) %)
+                              (for [i (range 100 999)
+                                    j (range 100 999)
+                                    :let [n (* i j)]]
+                                n))))
+
+(u/sectime (apply max (filter #(= (u/reverse-number %) %)
+                              (for [i (range 100 999)
+                                    j (range 100 999)
+                                    :when (or (zero? (mod i 11)) (zero? (mod j 11)))]
+                                (* i j)))))

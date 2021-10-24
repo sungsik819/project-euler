@@ -95,10 +95,10 @@
 
 ;; (sieve-of-eratostenes 600851475143) stackoverflow error
 ;; 에라토스테네스의 체 (n번째 숫자안의 소수를 구하기 위한 방법)
-(defn sieve-of-eratostenes [^long n]
-  (let [max-lange (long (Math/sqrt n))]
+(defn sieve-of-eratostenes [n]
+  (let [max-lange (Math/sqrt n)]
     (loop [a (range 2 (inc n))
-           n (long (first a))
+           n (first a)
            r []]
       (if (> n max-lange) (seq (into r a))
           (recur (remove #(zero? (mod % n)) a)
