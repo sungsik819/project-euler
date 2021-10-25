@@ -1,4 +1,5 @@
-(ns problem6)
+(ns problem6
+  (:require [utils :as u]))
 
 (defn solution6 [a b]
   (let [sqrt-sum (apply + (map #(* % %) (range a (inc b))))
@@ -18,4 +19,9 @@
 
 (solution6-1 100)
 
+;; https://ntalbs.github.io/2015/project-euler-006/
 
+(defn square-sum [n]
+  (quot (* n (+ 1 n) (+ 1 (* 2 n))) 6))
+
+(- (* (u/sum 100) (u/sum 100)) (square-sum 100))
